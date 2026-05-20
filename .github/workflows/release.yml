@@ -1,0 +1,29 @@
+name: Tag filter release
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'adb-filters/**'
+
+permissions:
+  contents: write
+
+jobs:
+  tag:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Create tag from pieFilterVersion
+        run: |
+          set -euo pipefail
+          VERSION=$(jq -r '.pieFilterVersion' adb-filters/filter-versions.json)
+          TAG="v${VERSION}"
+          if git rev-parse "$TAG" >/dev/null 2>&1; then
+            echo "Tag $TAG already exists; skipping."
+            exit 0
+          fi
+          git tag "$TAG"
+          git push origin "$TAG"

@@ -6,7 +6,29 @@ This repo is an open-source repository of PIE's adblock rules and scriptlets rea
 In `filterlists/`, you will find our custom text filters that include cosmetic EasyList-style rules as well as scriptlet-based rules that tackle more persistent issues on certain sites. These rules may or may not be covered by other filter lists but were generated in response to users reporting ads/annoyances on specific sites.
 
 To add our list to your adblocker's filter list rules, you can download or reference it from here!
-https://cdn.pie.org/adb-filters/pie_custom.txt
+https://cdn.jsdelivr.net/gh/piedotorg/pie-adblock-rules@main/adb-filters/pie_custom.txt
+
+## Extension filter content (`adb-filters/`)
+
+The `adb-filters/` directory contains the runtime filter content shipped to the PIE browser extension. These files are served to the extension over [jsDelivr's GitHub CDN](https://www.jsdelivr.com/github), which mirrors public GitHub repositories at the edge.
+
+The files are:
+
+- `pie_custom.txt` — PIE's custom adblock filter rules (uBlock Origin syntax).
+- `external-fixes.txt` — third-party "fixes"-style filters that complement the main list.
+- `default-pie-custom.json` — Chrome [Declarative Net Request](https://developer.chrome.com/docs/extensions/reference/api/declarativeNetRequest) ruleset packaged for the extension.
+- `filter-versions.json` — version manifest. The extension reads this from the `@main` ref of jsDelivr to discover the latest version, then pins each large filter file to an immutable tag.
+
+### URL pattern
+
+```
+https://cdn.jsdelivr.net/gh/piedotorg/pie-adblock-rules@<ref>/adb-filters/<file>
+```
+
+- Manifest (mutable): `https://cdn.jsdelivr.net/gh/piedotorg/pie-adblock-rules@main/adb-filters/filter-versions.json`
+- Pinned content (immutable): `https://cdn.jsdelivr.net/gh/piedotorg/pie-adblock-rules@v<pieFilterVersion>/adb-filters/<file>`
+
+A GitHub Actions workflow (`.github/workflows/release.yml`) automatically tags `main` as `v<pieFilterVersion>` whenever `adb-filters/` is updated, so each `pieFilterVersion` bump produces a stable, immutable jsDelivr URL.
 
 ## Scriptlets
 In `scriptlets/`, you will find our scriptlet reader source code and scriptlet source functions. Pie believes this scriptlet reader to be more plug-and-play ready than the other AST-based rule readers available online. Our scriptlet reader works on both UBO and ADG style scriptlet rules.

@@ -1,0 +1,890 @@
+! do not remove
+labreakfastburrito.com,topsecretrecipes.com#%#//scriptlet('remove-class', 'blueberry-dutch-macadamia-crumble')
+
+emoji.gg###yousuck
+emoji.gg#!##yousmell
+###ample_wpbs_slider
+##.ample_banner_container
+##.ad-banner
+##.ad-box
+##.ad-container
+##.ad-content
+##.ad-unit
+##.ads
+##.ads-container
+##.advertisement
+##.banner-ads
+##.text-ad
+##.text-ads
+##.ad
+##.ad-left
+##.adsense
+##.advert
+##.sponsored
+
+target.com###sskinny
+target.com##.jrYtzX
+uol.com.br##.up-floating
+! sportico.com,spy.com,tvline.com,deadline.com,indiewire.com,variety.com##+js(acis, document.createElement, /window,"googletag"/)
+! cbsnews.com#%#//scriptlet('set-constant', 'Object.prototype.shouldShowAd', 'falseFunc')
+! cbsnews.com##+js(remove-node-text, script, '"data-adm-url"')
+pandora.com##.Modal__container__body--adBlocker
+
+! twitch anti-adblock
+twitch.tv#%#//scriptlet('click-element-extended', '.video-player__container button[aria-label="Return to stream"]', '', '', 'true', 'false')
+! twitch element hide exception (hiding this element also hides the video player controls)
+twitch.tv#@##channel-player-disclosures+div
+! exception for ublock rule that creates unnecssary visual mode noise with the video player
+twitch.tv#@#.stream-display-ad__wrapper
+
+! adguard rules. replacement for ublock's `youtube.com##+js(json-prune, playerResponse.adPlacements playerResponse.playerAds playerResponse.adSlots adPlacements playerAds adSlots legacyImportant)` which BREAKS youtube
+www.youtube.com#%#//scriptlet('json-prune-fetch-response', 'playerResponse.adPlacements playerResponse.playerAds playerResponse.adSlots adPlacements playerAds adSlots', '', '/playlist\?list=|player\?|watch\?[tv]=/')
+! this one below breaks youtube TV
+! tv.youtube.com##+js(trusted-replace-xhr-response, '"adPlacements"', '"no_ads"', /playlist\?list=|player\?|watch\?[tv]=|youtubei\/v1\/player(?!\/get_drm_license)/)
+! but the one below this seems to do the same thing and doesn't break youtube TV
+tv.youtube.com##+js(trusted-replace-xhr-response, '"adPlacements"', '"no_ads"', /playlist\?list=|\/player(?:\?.+)?$|watch\?[tv]=/)
+
+! quick fixes
+www.youtube.com##+js(json-prune-xhr-response, adPlacements adSlots adBreakHeartbeatParams playerResponse.adPlacements playerResponse.adSlots playerResponse.adBreakHeartbeatParams [].playerResponse.adPlacements [].playerResponse.adSlots [].playerResponse.adBreakHeartbeatParams, , propsToMatch, /\/player(?:\?.+)?$/)
+www.youtube.com##+js(json-prune-xhr-response, adPlacements adSlots playerAds playerResponse.adPlacements playerResponse.adSlots playerResponse.playerAds [].playerResponse.adPlacements [].playerResponse.adSlots [].playerResponse.playerAds, , propsToMatch, /\/get_watch(?:\?.+)?$/)
+www.youtube.com##+js(json-prune-fetch-response, adPlacements adSlots adBreakHeartbeatParams playerResponse.adPlacements playerResponse.adSlots playerResponse.adBreakHeartbeatParams [].playerResponse.adPlacements [].playerResponse.adSlots [].playerResponse.adBreakHeartbeatParams, , propsToMatch, /player?)
+www.youtube.com##+js(json-prune-fetch-response, adPlacements adSlots playerAds playerResponse.adPlacements playerResponse.adSlots playerResponse.playerAds [].playerResponse.adPlacements [].playerResponse.adSlots [].playerResponse.playerAds, , propsToMatch, /get_watch?)
+www.youtube.com##+js(json-prune-fetch-response, adPlacements adSlots playerResponse.adPlacements playerResponse.adSlots, , propsToMatch, /playlist?)
+m.youtube.com,music.youtube.com,tv.youtube.com,www.youtube.com,youtubekids.com,youtube-nocookie.com##+js(json-prune-fetch-response, reelWatchSequenceResponse.entries.[-].command.reelWatchEndpoint.adClientParams.isAd entries.[-].command.reelWatchEndpoint.adClientParams.isAd, , propsToMatch, url:/reel_watch_sequence?)
+www.youtube.com##+js(trusted-replace-xhr-response, /"adPlacements.*?("adSlots"|"adBreakHeartbeatParams")/gms, $1, /\/player(?:\?.+)?$/)
+www.youtube.com##+js(trusted-replace-xhr-response, /"adPlacements.*?([A-Z]"\}|"\}{2\,4})\}\]\,/, , /playlist\?list=|\/player(?:\?.+)?$|watch\?[tv]=/)
+www.youtube.com##+js(trusted-replace-fetch-response, '"adPlacements"', '"no_ads"', player?)
+www.youtube.com##+js(trusted-replace-fetch-response, '"adSlots"', '"no_ads"', player?)
+www.youtube.com##+js(trusted-replace-fetch-response, '"adBreakHeartbeatParams"', '"no_hb"', player?)
+www.youtube.com##+js(trusted-replace-fetch-response, '"adSlots"', '"no_ads"', /^\W+$/)
+www.youtube.com##+js(nano-stb, [native code], 17000, 0.001)
+m.youtube.com,music.youtube.com,tv.youtube.com,www.youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, ytInitialPlayerResponse.playerAds, undefined)
+m.youtube.com,music.youtube.com,tv.youtube.com,www.youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, ytInitialPlayerResponse.adPlacements, undefined)
+m.youtube.com,music.youtube.com,tv.youtube.com,www.youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, ytInitialPlayerResponse.adSlots, undefined)
+m.youtube.com,music.youtube.com,tv.youtube.com,www.youtube.com,youtubekids.com,youtube-nocookie.com##+js(set, playerResponse.adPlacements, undefined)
+m.youtube.com,music.youtube.com,youtubekids.com,youtube-nocookie.com##+js(json-prune, playerResponse.adPlacements playerResponse.playerAds playerResponse.adSlots adPlacements playerAds adSlots important)
+www.youtube.com##+js(trusted-prevent-dom-bypass, Node.prototype.appendChild, fetch)
+www.youtube.com##+js(trusted-prevent-dom-bypass, Node.prototype.appendChild, Request)
+www.youtube.com##+js(trusted-prevent-dom-bypass, Node.prototype.appendChild, JSON.parse)
+www.youtube.com##+js(trusted-replace-fetch-response, '"adSlots"', '"no_ads"', /get_watch?)
+www.youtube.com##+js(json-prune, entries.[-].command.reelWatchEndpoint.adClientParams.isAd)
+www.youtube.com##+js(trusted-rpnt, script, (function serverContract(), (()=>{if("YOUTUBE_PREMIUM_LOGO"===ytInitialData?.topbar?.desktopTopbarRenderer?.logo?.topbarLogoRenderer?.iconImage?.iconType||location.href.startsWith("https://www.youtube.com/tv#/")||location.href.startsWith("https://www.youtube.com/embed/"))return;const e=ytcfg.data_.INNERTUBE_CONTEXT.client.userAgent\,t=t=>{ytcfg.data_.INNERTUBE_CONTEXT.client.userAgent=t?e.replace?.(/(Mozilla\/5\.0 \([^)]+)/\,"$1; "+t):e}\,o=["channel"];let n=!1\,r=o;document.addEventListener("DOMContentLoaded"\,(function(){const e=()=>{const e=document.getElementById("movie_player");if(!e||!window.location.href.includes("/watch?"))return void(r=o);const a=e.getPlayerResponse?.()\,i=e.getProgressState?.()\,s=e.getStatsForNerds?.();if(i&&i.duration>0&&(i.loaded<i.duration||i.duration-i.current>1)||a?.videoDetails?.isLive){if(!s?.debug_info?.startsWith?.("SSAP\, AD")){const o=a.videoDetails?.videoId\,i=a.playerConfig?.playbackStartConfig?.startSeconds??0\,l=e.getPlayerStateObject?.()?.isBuffering\,c=JSON.stringify(a.playabilityStatus?.errorScreen?.playerErrorMessageRenderer?.subreason?.runs);return void("UNPLAYABLE"===a?.playabilityStatus?.status&&!a?.playabilityStatus?.errorScreen?.playerErrorMessageRenderer?.playerCaptchaViewModel&&c?.includes?.("WEB_PAGE_TYPE_UNKNOWN")&&c?.includes?.("https://support.google.com/youtube/answer/3037019")?(r=r.slice(1)\,r.length>0?t(r[0]):t("")\,n=!1\,e.loadVideoById(o\,i)):0===r.length?(n=!1\,t("")):l&&"0.00 s"===s?.buffer_health_seconds&&"0x0"===s?.resolution&&n&&(t(r[0])\,n=!1\,e.loadVideoById(o\,i)))}i.duration>0&&e.seekTo?.(i.duration)}};e()\,new MutationObserver((()=>{e()})).observe(document\,{childList:!0\,subtree:!0})}))\,window.Map.prototype.has=new Proxy(window.Map.prototype.has\,{apply:(e\,t\,o)=>{if("onSnackbarMessage"===o?.[0]&&!n){const e=document.getElementById("movie_player");if(!e)return;const t=e.getStatsForNerds?.()\,o=e.getPlayerStateObject?.()?.isBuffering\,a=e.getPlayerResponse?.()?.playbackTracking?.videostatsPlaybackUrl?.baseUrl;o&&"0.00 s"===t?.buffer_health_seconds&&"0x0"===t?.resolution&&r.length>0&&(a.includes("reloadxhr")&&(r=r.slice(1))\,n=!0)}return Reflect.apply(e\,t\,o)}})\,window.JSON.stringify=new Proxy(window.JSON.stringify\,{apply:(e\,t\,o)=>{let n=o?.[0]\,r=n?.context?.client;return"object"==typeof n&&"attestationRequest"in n&&"object"==typeof n?.playbackContext?.contentPlaybackContext&&r?.mainAppWebInfo?.graftUrl?.includes("/watch?")&&(o[0].playbackContext.contentPlaybackContext.lactMilliseconds=window.String(Date.now()))\,Reflect.apply(e\,t\,o)}});const a={apply:(e\,t\,o)=>{const n=o[0];return"function"==typeof n&&n.toString().includes("onAbnormalityDetected")&&(o[0]=function(){})\,Reflect.apply(e\,t\,o)}};window.Promise.prototype.then=new Proxy(window.Promise.prototype.then\,a)})();(function serverContract(), sedCount, 1)
+
+! keeping the below commented out scriptlets in case they are useful, but the newer set is below
+! www.youtube.com##+js(trusted-replace-outbound-text, JSON.stringify, {"contentPlaybackContext", {"adPlaybackContext":{"pyv":true}\,"contentPlaybackContext", condition, currentUrl":"/watch)
+! www.youtube.com##+js(trusted-json-edit-fetch-request, ..playbackContext[?.contentPlaybackContext]+={"adPlaybackContext":{"pyv":true}}, propsToMatch, /\/(player|get_watch)/)
+! www.youtube.com##+js(trusted-json-edit-fetch-request, ..client[?.clientName=="WEB"]+={"clientScreen":"CHANNEL"}, propsToMatch, /\/(player|get_watch)/)
+www.youtube.com##+js(trusted-json-edit-xhr-request, [?..userAgent*="channel"]..client[?.clientName=="WEB"]+={"clientScreen":"CHANNEL"}, propsToMatch, /player?)
+www.youtube.com##+js(trusted-json-edit-xhr-request, [?..userAgent=/adunit|channel|lactmilli|instream|eafg/]..referer=repl({"regex":"$"\,"replacement":"#reloadxhr"}), propsToMatch, /player?)
+
+! experimental
+www.youtube.com##+js(trusted-json-edit-xhr-request, [?..userAgent*="adunit"]..client[?.clientName=="WEB"]+={"clientScreen":"ADUNIT"}, propsToMatch, /player?)
+www.youtube.com##+js(trusted-json-edit-xhr-request, [?..userAgent*="lactmilli"][?..graftUrl*="&list="]+={"params":"8AUB"}, propsToMatch, /player?)
+www.youtube.com##+js(trusted-json-edit-xhr-request, [?..userAgent*="instream"]..playbackContext[?.contentPlaybackContext]+={"adPlaybackContext":{"adType":"AD_TYPE_INSTREAM"}}, propsToMatch, /player?)
+www.youtube.com##+js(trusted-json-edit-xhr-request, [?..userAgent*="eafg"]+={"params":"eAFgAQ"}, propsToMatch, /player?)
+
+
+! pie yt shorts scriptlet
+www.youtube.com#%#//scriptlet('yt-shorts')
+! youtube video seek
+www.youtube.com#%#//scriptlet('video-seek', 'video.html5-main-video', '#movie_player.ad-showing', 'start-from-ms:1008', 'stop-on-video-end:true')
+
+youtube.com##.ytlr-horizontal-list-renderer__items > .yt-virtual-list__container > .yt-virtual-list__item--visible.yt-virtual-list__item--selected.yt-virtual-list__item:has-text(Ad)
+www.youtube.com###toast:has(> #action-button a.yt-spec-button-shape-next[href^="https://support.google.com/youtube/answer/3037019"])
+
+! triggers youtube anti adblock
+youtube.com#@##player-ads
+@@||youtube.com^$generichide
+
+youtube.com#!#meta[name="apple-itunes-app"]
+youtube.com#!#div#sparkles-container
+www.youtube.com#%#//scriptlet('yt-fetch-replace')
+
+! this rule breaks facebook, adding an exception for a while which we can eventually remove once everyone's filter lists update to not use the non-excepted version of this rule
+facebook.com#@#h3:contains(News Feed) + div + div > div:nth-child(2)
+
+! facebook css
+facebook.com,facebookwkhpilnemxj7asaniu7vnjjbiltxjqhye3mhbshg7kx5tfyd.onion##div[role="complementary"] div:not([class]):not([id]) > span:not([class]):not([id]):not([aria-labelledby])
+facebook.com,facebookwkhpilnemxj7asaniu7vnjjbiltxjqhye3mhbshg7kx5tfyd.onion#?#div[role="complementary"] > div[class] > div[class] > div[class] span > div > div:not([aria-label]):not([data-visualcompletion]):has(> div[class] > div[class] div[class] > a[href^="https://l."][href*="facebook.com/l.php?u="][target="_blank"])
+facebook.com,facebookwkhpilnemxj7asaniu7vnjjbiltxjqhye3mhbshg7kx5tfyd.onion##div[role="region"] + div[role="main"] div[role="article"] div[style="border-radius: max(0px, min(8px, ((100vw - 4px) - 100%) * 9999)) / 8px;"] > div[class]:not([class*=" "])
+web.facebook.com,facebook.com###seo_pivots ~ div > div[style^="max-width"] > div[class] > div[style^="max-width"]:has(a[href^="/ads/about/?"])
+facebook.com##[data-0="0"] + div:has(a[aria-label="Sponsored"])
+facebook.com##[data-0="0"] + div:has(a[href*="/ads/about"])
+facebook.com##div[role="complementary"] div[class=""]:has(span:contains(Sponsored))
+facebook.com##div.x1lliihq:has([data-ad-rendering-role*="cta"])
+facebook.com##[data-0="0"] + div:has([data-ad-rendering-role*="cta"])
+web.facebook.com,www.facebook.com##div[role="complementary"] a[aria-labelledby][attributionsrc^="/privacy_sandbox/comet/register/source/?eid="][href^="http"]
+web.facebook.com,www.facebook.com##div[role="complementary"] a[rel="nofollow noreferrer external"][attributionsrc^="/privacy_sandbox/comet/register/source/"][attributionsrc*="?eid="]
+web.facebook.com,www.facebook.com##div[role="complementary"] a[attributionsrc][href^="http"][target="_blank"][role="link"][rel*="noreferrer"]:has(img[src])
+web.facebook.com,www.facebook.com##div[role="complementary"] h3 span[style^="-webkit-box-orient:vertical"]:has-text(/^Sponsored$/)
+facebook.com##div[aria-describedby]:not([aria-posinset]) :is(h3, h4) span > a[href]:not([href^="/groups/"]):not([href*="section_header_type"]):matches-attr(href="/__cft__\[0\]=[-\w]{290,}/"):upward(div[aria-describedby]):style(height: 0 !important; overflow: hidden !important;)
+www.facebook.com##+js(json-prune, require.0.3.0.__bbox.define.[].2.is_linkshim_supported require.0.3.0.__bbox.define.[].2.click_ids)
+web.facebook.com,www.facebook.com##+js(set, Env.nxghljssj, false)
+web.facebook.com,www.facebook.com##+js(json-edit, ..data.viewer..nodes.*[?.__typename=="AdsSideFeedUnit"])
+web.facebook.com,www.facebook.com##+js(json-prune-xhr-response, data.viewer.sideFeedUnit.nodes.[].new_adverts.nodes.[-].sponsored_data, , propsToMatch, /graphql)
+web.facebook.com,www.facebook.com##+js(json-prune, require.0.3.0.__bbox.require.[].3.1.__bbox.result.data.viewer.sideFeedUnit.nodes.[].new_adverts.nodes.[-].sponsored_data)
+web.facebook.com,www.facebook.com##+js(json-prune, require.0.3.0.__bbox.require.[].3.1.__bbox.result.data.serpResponse.results.edges.[-].rendering_strategy.view_model.story.sponsored_data.ad_id)
+web.facebook.com,www.facebook.com##+js(json-edit, ..__bbox.result.data.node[?@.*.__typename=="SponsoredData"])
+web.facebook.com,www.facebook.com##+js(jsonl-edit-xhr-response, .data[?@.category=="SPONSORED"].node, propsToMatch, /graphql)
+web.facebook.com,www.facebook.com##+js(jsonl-edit-xhr-response, ..node[?.*.__typename=="SponsoredData"], propsToMatch, /graphql)
+web.facebook.com,www.facebook.com##+js(jsonl-edit-xhr-response, .data.viewer.news_feed.edges.*[?@.category=="SPONSORED"].node, propsToMatch, /graphql)
+
+
+! facebook pie scriptlets
+facebook.com,facebookwkhpilnemxj7asaniu7vnjjbiltxjqhye3mhbshg7kx5tfyd.onion#%#//scriptlet('facebook')
+facebook.com,facebookwkhpilnemxj7asaniu7vnjjbiltxjqhye3mhbshg7kx5tfyd.onion#%#//scriptlet('facebook-sponsored')
+facebook.com,facebookwkhpilnemxj7asaniu7vnjjbiltxjqhye3mhbshg7kx5tfyd.onion#%#//scriptlet('facebook-videos')
+facebook.com,facebookwkhpilnemxj7asaniu7vnjjbiltxjqhye3mhbshg7kx5tfyd.onion#%#//scriptlet('facebook-marketplace-item')
+facebook.com,facebookwkhpilnemxj7asaniu7vnjjbiltxjqhye3mhbshg7kx5tfyd.onion#%#//scriptlet('facebook-marketplace-hide')
+facebook.com,facebookwkhpilnemxj7asaniu7vnjjbiltxjqhye3mhbshg7kx5tfyd.onion#%#//scriptlet('facebook-marketplace-upsell')
+facebook.com,facebookwkhpilnemxj7asaniu7vnjjbiltxjqhye3mhbshg7kx5tfyd.onion#%#//scriptlet('facebook-marketplace')
+facebook.com,facebookwkhpilnemxj7asaniu7vnjjbiltxjqhye3mhbshg7kx5tfyd.onion#%#//scriptlet('facebook-reels')
+
+hulu.com##+js(json-prune-fetch-response, breaks custom_breaks_data pause_ads video_metadata.end_credits_time, pause_ads, propsToMatch, /playlist)
+hulu.com##+js(json-prune-fetch-response, breaks custom_breaks_data pause_ads video_metadata.end_credits_time, breaks, propsToMatch, /playlist)
+hulu.com##+js(json-prune, breaks custom_breaks_data pause_ads video_metadata.end_credits_time, pause_ads)
+hulu.com##+js(json-prune, breaks custom_breaks_data pause_ads video_metadata.end_credits_time, breaks)
+hulu.com##+js(xml-prune, 'xpath(//*[name()="MPD"]/@mediaPresentationDuration | //*[name()="Period"][.//*[name()="BaseURL" and contains(text(),"/ads-")]] | //*[name()="Period"][starts-with(@id,"ad")] | //*[name()="Period"][starts-with(@id,"Ad")] | //*[name()="Period"]/@start)', Period[id^="Ad"i], .mpd)
+
+play.hbomax.com,play.max.com##+js(xml-prune, xpath(//*[name()="MPD"]/@mediaPresentationDuration | //*[name()="Period"]/@start | //*[name()="Period"][not(.//*[name()="SegmentTimeline"])][not(.//*[name()="ContentProtection"])] | //*[name()="Period"][./*[name()="BaseURL"]][not(.//*[name()="ContentProtection"])]), , .mpd)
+play.hbomax.com,play.max.com##+js(json-prune, adtech-brightline adtech-google-pal adtech-iab-om)
+play.hbomax.com,play.max.com##+js(json-prune, ssaiInfo fallback.ssaiInfo)
+
+! slashdot
+dogdrip.net,infinityfree.com,slashdot.org,smsonline.cloud##+js(no-fetch-if, -load.com/script/, length:101)
+dogdrip.net,infinityfree.com,slashdot.org,smsonline.cloud##+js(nostif, )](this\,..., 3000-6000)
+slashdot.org##+js(aeld, , )](this\,...)
+slashdot.org##+js(remove-node-text, script, html-load.com)
+slashdot.org##+js(addEventListener-defuser, '', ')](this,...')
+slashdot.org##+js(prevent-setTimeout, ')](this,...', 3000-6000)
+slashdot.org##+js(prevent-fetch, -load.com/script/, length:101)
+slashdot.org##+js(set-local-storage-item, /_fa_Y2FjaGVfYWRibG9ja19jaXJjdW12ZW50X3Njb3Jl$/, $remove$)
+slashdot.org##+js(set-local-storage-item, /_fa_Y2FjaGVfaXNfYmxvY2tpbmdfYWRz$/, $remove$)
+slashdot.org##+js(set-local-storage-item, /_fa_Y2FjaGVfaXNfYmxvY2tpbmdfYWNjZXB0YWJsZV9hZHM=$/, $remove$)
+slashdot.org##+js(set-local-storage-item, /_fa_dXVpZA==$/, $remove$)
+slashdot.org##+js(set-local-storage-item, /_fa_bGFzdF9iZmFfYXQ=$/, $remove$)
+slashdot.org##+js(set-local-storage-item, adshield-analytics-uuid, $remove$)
+@@||slashdot.org^$generichide
+
+! pie scriptlets
+netflix.com#%#//scriptlet('netflix')
+
+pinterest.*##+js(json-prune, initialReduxState.pins.{-}.pin_promotion_id initialReduxState.resources.UserHomefeedResource.*.data.[-].pin_promotion_id)
+pinterest.*##+js(json-prune, resource_response.data.[-].pin_promotion_id resource_response.data.results.[-].pin_promotion_id)
+
+pluto.tv#%#//scriptlet('abort-on-stack-trace', 'Date.prototype.getTime', 'startSessionHeartBeat')
+pluto.tv#%#//scriptlet('json-prune-fetch-response', 'adBreaks.[].startingOffset adBreaks.[].adBreakDuration adBreaks.[].ads adBreaks.[].startTime adBreak adBreakLocations', '', '/session.json')
+
+! optimizations
+@@||amazon.com^$generichide
+apnews.com##+js(remove-attr, data-header-hasleaderboard, html[data-header-hasleaderboard])
+
+!! ads
+reddit.com##shreddit-comments-page-ad [slot="credit-bar"]
+reddit.com##shreddit-comment-tree-ad
+reddit.com##shreddit-async-loader[bundlename="sidebar_ad"]
+cnn.com##+js(set-constant, Object.prototype._setAdsConfigurations, noopFunc)
+cnn.com##+js(trusted-rpnt, script, (()=>{window.FAVE=window.FAVE||{};const s={set:(s,e,n,a)=>{if(s?.settings?.ads?.ssai?.prod?.clips?.enabled&&(s.settings.ads.ssai.prod.clips.enabled=!1),s?.player?.instances)for(var i of Object.keys(s.player.instances))s.player.instances[i]?.configs?.ads?.ssai?.prod?.clips?.enabled&&(s.player.instances[i].configs.ads.ssai.prod.clips.enabled=!1);return Reflect.set(s,e,n,a)}};window.FAVE=new Proxy(window.FAVE,s)})(), sedCount, 1)
+crunchyroll.com##+js(json-prune, value.media.ad_breaks)
+crunchyroll.com##+js(nosiif, onAdVideoStart)
+urbanize.city###block-urbanize-ad-slots-m-sticky-banner
+urbanize.city##.block-urbanize-ad-slots
+urbanize.city##aside:has(.block-urbanize-ad-slots)
+urbanize.city##.post-header-wrapper:has(.block-urbanize-ad-slots)
+foxnews.com##.ad-container
+urbanize.city###block-urbanize-ad-slots-m-sticky-banner
+urbanize.city##.block-urbanize-ad-slots
+urbanize.city##aside:has(.block-urbanize-ad-slots)
+urbanize.city##.post-header-wrapper:has(.block-urbanize-ad-slots)
+yelp.com##li:has([aria-describedby="adTooltipDialogDesc"])
+lexpress.fr##.placeholder--ban-atf-wrapper
+express.co.uk#!##div-gpt-ad-right-hand-slot,#mantis-recommender-placeholder,#ad-vip-article,.most-read-container,#ovp-primis
+digitaltrends.com#!#.dtads-location
+howstuffworks.com##.ad-tag
+howstuffworks.com##.ad-disclaimer
+yahoo.com###mrt-node-Lead-1-Ad
+offerup.com##main ul>a
+yahoo.com##.sticky[class*="top-"]:has(style)
+yahoo.com##[id^="mid-center-ad"]
+sports.yahoo.com##[id*='sda-']
+nytimes.com##.e1xxpj0j0
+pngtosvg.com###xsdporj-blanket
+cbsnews.com##.DCDOr
+dailymotion.com#%#//scriptlet('prevent-setTimeout', 'adBlockerDetection')
+amazon.com##.AdHolder
+amazon.com##a[aria-label="Sponsored video, click to navigate to featured page."]
+amazon.com##[data-var="advertiser"]
+amazon.com##div[role="listitem"]:has(span:contains(Sponsored))
+amazon.com##[data-ref_*="displayAds"]
+amazon.com##[id*=desktop-ad]
+
+washingtonpost.com#!#[data-qa="right-rail-ad"]
+washingtonpost.com#!#[data-ad-module]
+washingtonpost.com#!#[data-testid="placeholder-box"]
+forbes.com#@#.affiliate-link
+brainly.com##div[data-testid*="ad_below"]
+brainly.com#!#[data-testid="brainly_ads_placeholder"]
+linkedin.com##[data-id*='Promoted']
+linkedin.com##.scaffold-finite-scroll__content .ember-view:has(a[aria-label*='Promoted'])
+bing.com#!#li.b_ad
+bing.com#!#span.b_adSlug
+bing.com##ul.ta_l
+bing.com##li.b_adLastChild
+mail.yahoo.com##li:has(a[data-test-id="pencil-ad-messageList"])
+mail.yahoo.com#!#li:has([rel="noreferrer"])
+usnews.com##aside[class*='ad-spacer']
+z-lib.io##img.img-fluid
+wellandgood.com##div[data-ad-region]
+musicrow.com##section.widget_text
+musicrow.com##div.widget_text
+musicrow.com##div.sidebar_right.av-blog-meta-tag-disabled
+thedailybeast.com##div.ad-container
+thedailybeast.com##div.tdb-ads-block
+digitalmusicnews.com##center[class*='ad']
+buzzfeed.com##div > iframe
+buzzfeed.com##div.ad-slot
+buzzfeed.com##section[aria-label="Promoted content"]
+inc.com##div.ad-container
+aniwatchtv.to##+js(set, window.open, noopFunc)
+aniwatchtv.to##+js(disable-newtab-links)
+fortune.com##body div#__next > div > div:first-child
+washingtonpost.com##body div#__next > div > div:first-child
+samsclub.com##div.sc-sba-modules:has(span.sc-specials-label),li:has(span.sc-specials-label)
+samsclub.com##div.sc-product-carousel-canary-card-has-sponsored-product
+samsclub.com##div:has(> div[io-id]:has-text(Sponsored))
+parade.com##div[class*='adSlot']
+thetimes.com##div[class*='styles__PromotedContentContainer']
+biblegateway.com##div.wrapper:has(a[href*='utm_source'])
+biblegateway.com##div.basic-info-content:has(a[href*='utm_source'])
+itftennis.com##div.commercial-banner
+trueachievements.com#^##ta-ab-overlay
+tomsguide.com##[data-type="ads"]
+tomsguide.com#!#li.sponsored-post
+tomsguide.com##div.dfp-leaderboard-container
+tomsguide.com##div.ad-unit
+tomsguide.com##[data-widget-type="ads"]
+si.com##[id*='static-top-ad-placeholder']
+reuters.com##[data-testid="ResponsiveAdSlot"]
+perezhilton.com##[class*='ad-parent']
+hdtodayz.to##div.alert:contains(adblock)
+hdtoday.*##+js(nowoif)
+hdtoday.*##+js(acs, globalThis, break;case)
+hdtoday.*##+js(acs, document.documentElement, break;case $.)
+hdtoday.*##+js(acs, EventTarget.prototype.addEventListener, delete window)
+hdtoday.*##iframe[srcdoc*="AdBlock"]
+hdtoday.*###overlay-container
+hdtoday.*#%#//scriptlet('json-prune', '*', 'pop_type')
+hdtoday.*#%#//scriptlet('json-prune', '*', 'rot_url')
+gamebanana.com#!#module#AdBlockAppealModule
+
+
+! annoyances/banners
+twitch.tv##div:has(> .consent-banner)
+cnn.com##+js(set-constant, FAVE.settings.ads.ssai.prod.clips.enabled, false)
+cnn.com##+js(set-constant, FAVE.settings.ads.ssai.prod.liveAuth.enabled, false)
+cnn.com##+js(set-constant, FAVE.settings.ads.ssai.prod.liveUnauth.enabled, false)
+
+facebook.com##div[data-pagelet*=FeedUnit]:has([href*=ads])
+bleacherreport.com##div[data-testid=ad]
+sfchronicle.com##+js(ra, style, body)
+
+msuspartans.com##.row > ads-component
+
+pch.com##.ad_slot_header
+
+aternos.org###placement-takeover
+aternos.org##div[class*="ad-dfp"]
+aternos.org##aside:has(div.ad-label)
+
+now.gg#%#//scriptlet('prevent-element-src-loading', 'script', '/\/prebid-load\.js|fundingchoicesmessages\.google\.com/')
+now.gg##div[id*=-ad-app-page-leaderboard-container]
+
+barstoolsports.com##img#dk-disclaimer-desktop
+barstoolsports.com##img#dk-disclaimer-mobile
+barstoolsports.com##div.sticky:has(#featuredText)
+
+allrecipes.com#%#//scriptlet('remove-class', 'adjusted-right-rail|mntl-article--two-column-right-rail|main')
+
+msn.com##.consumption-page-gridarea_rail
+msn.com#!#[data-testid="ad-container"]
+
+instyle.com##div.mm-ads-leaderboard-header
+instyle.com##+js(spoof-css, main#main, margin-top, 0px)
+
+theknot.com##div[class*="ad-right-rail"]
+theknot.com##div[class*="ad-container"]
+theknot.com##[class*="related-video-container"]
+theknot.com##[class*="header-ad"]
+
+@@||getcoloringpages.com^$generichide
+@@||photopea.com^$generichide
+@@||elise.ai^$generichide
+@@||panel.freemcserver.net^$generichide
+@@||minigiants.io^$generichide
+@@||tomsguide.com^$generichide
+@@||aol.com^$generichide
+@@||cycletrader.com^$generichide
+@@||polybuzz.ai^$generichide
+@@||kroger.com^$generichide
+@@||onlinegbd.com^$generichide
+@@||now.gg^$generichide
+
+asuracomic.net###chapter-above-ads
+asuracomic.net###main-menu-ads
+
+scribd.com##.between_page_portal_root
+scribd.com##div[data-testid="bottom-right-mrec"]
+scribd.com##div:has(> div[data-e2e="dismissible-ad-header-scribd_rightrail_adhesion"])
+scribd.com##div[data-testid="sticky-wrapper"]:has(a[href*="oauth/signup"])
+
+stltoday.com#%#//scriptlet('remove-class', 'paywall-loaded')
+
+undertheoaktree.vip##+js(no-xhr-if, /undertheoaktree\.vip/ method:/HEAD|OPTIONS/)
+
+ecosia.org##div.clicktrackedAd_js
+ecosia.org###adBlock
+ecosia.org##div[data-test-id="meta-results"]:has([data-test-id="ad-block-notice"])
+
+nfl.com#%#//scriptlet('set-constant', 'Object.prototype.bannerIds', 'undefined')
+
+perchance.org#%#//scriptlet('set-constant', 'createAdCtn', 'noopFunc')
+perchance.org#%#//scriptlet('prevent-setTimeout', 'adIframesExist')
+
+iqair.com##.cdk-overlay-container
+iqair.com##+js(remove-class, 'cdk-global-scrollblock', 'body')
+
+wayfair.com##section div[data-hb-id=BoxV3]:has(div[data-node-id*=Sponsored])
+
+client.falixnodes.net##+js(trusted-rpnt, script, /(?<=^\s+window.addEventListener\("load"[\S\s]+{[\S\s]+.nav-link.dropdown-toggle[\S\s]+data-bs-popper[\S\s]+\);)[\s\s]+/, if (location.href.match(/adblock/)){location.href="https://client.falixnodes.net";}, sedCount, 1)
+client.falixnodes.net##+js(rpnt, script, window.location.href = '/hello';)
+client.falixnodes.net##+js(nostif, /mylovelyobj|amzn_aps_csm|\'\/hello\'|YW16bl9hcHNfY3Nt|cmVwb3J0RXJyb3Jz|L3ZlcnktcGxlYXNl|getAdnginName|hasOwnProperty|location/)
+client.falixnodes.net##+js(nosiif, /mylovelyobj|amzn_aps_csm|\'\/hello\'|YW16bl9hcHNfY3Nt|cmVwb3J0RXJyb3Jz|L3ZlcnktcGxlYXNl|getAdnginName|hasOwnProperty|location/)
+client.falixnodes.net##+js(rpnt, script, /googletag.*?enableServices\(\)\;/s)
+client.falixnodes.net##+js(rpnt, script, /googletag\.pubads\(\).*rewardedSlot\)\;\s+\}\)\;/s)
+
+offerup.com##main li:has(a[aria-label*=Promoted])
+
+
+msn.com#%#//scriptlet('trusted-replace-node-text', 'script', '/"adsFree\\\":false/', '/"adsFree\\\":false/', '"adsFree\":true')
+msn.com#%#//scriptlet('trusted-replace-node-text', 'script', '/"preroll\\\":true/', '/"preroll\\\":true/', '"preroll\":false')
+msn.com#!#p.ark-ad-message
+
+@@||drakecomic.org^$generichide
+drakecomic.org##div[id*="netpub"]
+drakecomic.org##a[href="/membership"]
+
+slatereport.com##article .entry-content div:has(div[id*=_ad])
+
+countryroadssourdough.com##div[id^=AdThrive]
+
+pornhub.com##.topAdContainter
+pornhub.com##.mgp_overlayContainer
+pornhub.com###abAlert
+pornhub.com##div.sideAds
+pornhub.com##+js(remove-attr, style, .container, asap stay)
+pornhub.com##+js(remove-attr, style, #main-container, asap stay)
+pornhub.com##+js(remove-attr, style, .frontListingWrapper, asap stay)
+pornhub.com##+js(remove-attr, style, .sectionWrapper, asap stay)
+pornhub.com##.container > div[style*="inset"]
+
+tabs.ultimate-guitar.com#!#bidding-unit
+tabs.ultimate-guitar.com#!#bidding-wrapper
+
+mozilla.org##section:has(a.pong)
+! inexplicably the .top-banner selector in easylist breaks MDN in visual mode, so we have an exception for that rule and we instead remove the same element (rather than just hiding)
+mozilla.org#@#.top-banner
+mozilla.org#!#.top-banner
+
+hanime.tv##+js(set-cookie, in_d4, 1)
+hanime.tv##+js(set-cookie, in_m4, 1)
+
+1stream.eu#!#body ~ iframe
+1stream.eu#!#body a[href*="/ad/"]
+
+macrocreator.com##div:has(> div > div > div > div > h4.adblock_title)
+
+moonspin.us##.chakra-modal__overlay
+moonspin.us##.chakra-modal__content-container
+
+loiz.store##div:has(img[src*="ads-block-detector"])
+
+@@||sandtris.com^$generichide
+sandtris.com##div.adsbox .ad
+sandtris.com##+js(rmnt, #text, ads!)
+
+classace.io##div[class*="AIQuestionPageBody_adblockNonPremium__"]
+classace.io##div[class*="GoogleInArticleAdsenseContainer_adWrapper__"]
+
+callofthenightchapters.com##.code-block
+
+bloomingdales.com##.sortable-grid-sponsored-items
+
+trustpilot.com###onetrust-consent-sdk
+usmagazine.com###onetrust-banner-sdk
+
+redfin.com##.HomeCardContainer:has(.Badge--default)
+
+evite.com##.fabric-free-banner-ad__wrapper
+
+appdoze.net#^#div.wrapper-page+div
+
+iq.com#^#body > div[style]:not([id])
+
+101soundboards.com###downloadModal
+101soundboards.com##.modal-backdrop
+101soundboards.com##.pace-active
+101soundboards.com##+js(remove-class, 'pace-running', 'body')
+101soundboards.com##+js(remove-class, 'modal-open', 'body')
+
+genius.com##div[class^=TopContent]:has([id*=-ad])
+bbc.com##[data-component="ad-slot"]
+maxroll.gg##.fixed:has(> .bg-black-450.border-dark-5)
+megacloud.tube,megacloud.blog,s3embtaku.pro,doodstreams.net,divicast.com,moviesjoy.plus,goku.to,f2movies.to,dokicloud.one,mzzcloud.life,fmovies.app,moviesjoy.to,sflix.to,himovies.*,vidcloud.pro,vidcloud.msk.ru###overlay-container
+##html > div[class][style^="pointer-events: none; position: absolute; top: 0px; left: 0px; width:"]
+himovies.*##iframe[srcdoc*="AdBlock"]
+
+kissanime.com.ru,kissanime.co#%#//scriptlet('prevent-xhr', 'pagead2.googlesyndication.com')
+kissanime.com.ru,kissanime.co#%#//scriptlet('prevent-fetch', 'pagead2.googlesyndication.com')
+kissanime.com.ru#%#//scriptlet('set-constant', 'check_adblock', 'true')
+9xplayer.com,tempatwisata.pro,kuyhaa-me.site,igg-games.com,urlbluemedia.shop,kuyhaa.me,cosmic1.co,lodynet.link,vidbinge.com,pelismax.one,stbturbo.xyz,y2mate.is,gogoanimes.fi,vdbtm.shop,hdfilme.plus,get-to.link,zoro.se,moviekhhd.biz,drivemoe.com,fusevideo.io,watchsomuch.to,faselhd-embed.scdns.io,nxbrew.net,toonily.me,limetorrents.lol,pelisflix2.green,185.217.95.44,moviesjoyhd.to,faselhd.*,5.45.95.74,kissasian.*,opensubtitles.org,1337xx.to,praiing.monster,lookmovie2.to,poisteewoofs.monster,streamvid.net,lookmovie.foundation,1l1l.to,file-upload.org,meetdownload.com,hentaiasmr.moe,witanime.org,yugenanime.tv,kissanimefree.cc,animeyt.es,anichin.top,tinyzonetv.se,monoschinos2.com,klmanga.net,zinmanhwa.com,ssrmovies.singles,tuktukcinema.*,phimmoiyyy.net,futbol-libre.org,rule34hentai.net,nettruyento.com,animepahe.ru,btcmovies.xyz,vidsrc.*,123movies-hd.online,dramacool.*,123movies.*,jujmanga.com,srsone.top,phimgiz.net,himovies.*,hhdstreams.club,uhdstreams.club,holymanga.net,strims.*,kissanime.*,xmovies8.pw,sektekomik.com,moviesjoy.*,1337x.*,0gomovies.*,vipbox.lc,watch-serieshd.cc,semawur.com,tamilblasters.unblockit.dev,shingekinokyojinepisodes.com,ekinomaniak.net,rexdlfile.com,downloadhub.ink,cuturl.in,123movie.date,manganelo.link,hblinks.pro,akwams.*,desiupload.co,leechall.com,allcalidad.la,disasterscans.com,masteranime.es,savesubs.com,gdtot.*,mkvcinemas.*,akwam.*,mirrored.to,desustream.me,streamwire.net,brbushare.com,9kmovies.fit,myflixerz.to,sflix.ps,9animetv.to,s3embtaku.pro#%#//scriptlet('json-prune', '*', 'pop_type')
+9xplayer.com,tempatwisata.pro,kuyhaa-me.site,igg-games.com,urlbluemedia.shop,kuyhaa.me,cosmic1.co,lodynet.link,vidbinge.com,pelismax.one,stbturbo.xyz,y2mate.is,gogoanimes.fi,vdbtm.shop,hdfilme.plus,get-to.link,zoro.se,moviekhhd.biz,drivemoe.com,fusevideo.io,watchsomuch.to,faselhd-embed.scdns.io,nxbrew.net,toonily.me,limetorrents.lol,pelisflix2.green,185.217.95.44,moviesjoyhd.to,faselhd.*,5.45.95.74,kissasian.*,opensubtitles.org,1337xx.to,praiing.monster,lookmovie2.to,poisteewoofs.monster,streamvid.net,lookmovie.foundation,1l1l.to,file-upload.org,meetdownload.com,hentaiasmr.moe,witanime.org,yugenanime.tv,kissanimefree.cc,animeyt.es,anichin.top,tinyzonetv.se,monoschinos2.com,klmanga.net,zinmanhwa.com,ssrmovies.singles,tuktukcinema.*,phimmoiyyy.net,futbol-libre.org,rule34hentai.net,nettruyento.com,animepahe.ru,btcmovies.xyz,vidsrc.*,123movies-hd.online,dramacool.*,123movies.*,jujmanga.com,otakufr.co,srsone.top,phimgiz.net,himovies.*,hhdstreams.club,uhdstreams.club,holymanga.net,strims.*,kissanime.*,xmovies8.pw,sektekomik.com,moviesjoy.*,1337x.*,0gomovies.*,vipbox.lc,watch-serieshd.cc,semawur.com,tamilblasters.unblockit.dev,shingekinokyojinepisodes.com,ekinomaniak.net,rexdlfile.com,downloadhub.ink,cuturl.in,123movie.date,manganelo.link,hblinks.pro,akwams.*,desiupload.co,leechall.com,allcalidad.la,disasterscans.com,masteranime.es,savesubs.com,gdtot.*,mkvcinemas.*,akwam.*,mirrored.to,myflixerz.to,sflix.ps,9animetv.to,s3embtaku.pro#%#//scriptlet('json-prune', '*', 'rot_url')
+1movielinkbd.com,ytmp3.la,swiftuploads.com,techbloogs.com,oii.la,englismovies.pro,tpi.li,go.cloutgist.com,brbeast.com,vidsrc2.*,tutwuri.id,lokerwfh.net,insmyst.com,iir.la,tvi.la,cosplay18.pics,hianime.*,megacloud.blog,mobiletvshows.site,movies4u.*,x-x-x.tube,pornx.to,4khd.com,dlhd.*,kissanime.*,vidsrc.*,pahe.*,vipbox.lc,sterham.net,myflixerz.to,sflix.ps,9animetv.to,s3embtaku.pro#%#//scriptlet('prevent-window-open')
+sterham.net##+js(remove-node-text, script, utm_data)
+sterham.net##+js(remove-node-text, script, ferit.online)
+9animes.ru#%#//scriptlet('prevent-xhr', 'pagead2.googlesyndication.com')
+stevenuniverse.best#!##adblock-popup
+lookmovie2.to#!#.notifyjs-corner
+surfline.com#!#[role="presentation"][class*='AdBlock']
+
+nfl.com#!#.nfl-c-photo-album__adv.nfl-c-photo-album__adv--carousel
+nfl.com#!#.advertisement-list-view
+nfl.com#!#iframe[id*='google_ads']
+nfl.com##+js(remove-class, 'nfl-c-photo-album__adv--visible', 'div.nfl-c-photo-album', 'stay')
+
+southpasadenan.com#!#._ning_outer
+
+linkedin.com##div[data-finite-scroll-hotkey-item]:has([attributionsrc])
+linkedin.com##div[data-finite-scroll-hotkey-item]:contains(Promoted)
+
+vkspeed.com#%#//scriptlet('set-constant', 'playfirstime', '1')
+
+cnn.com##.eng_top_ww_widget
+cnn.com##.bizdev-outbrain
+yahoo.com##[data-content="Advertisement"]
+yahoo.com###sda-Horizon
+yahoo.com###col2Bottom
+cbsnews.com##.ad-wrapper
+
+gokutv.pics#!#.playads
+washingtonpost.com#!#div.adslot:has([data-testid="placeholder-box"])
+discordbotlist.com#!#.bot-block+h5
+discordbotlist.com#!#.ad+h5
+discordbotlist.com##div.bot-ad
+
+! google performance
+@@||google.com^$generichide
+google.com##div[aria-label="Ads"]
+google.com###bottomads
+google.com##[data-is-ad="1"]
+
+@@||usmagazine.com^$generichide
+usmagazine.com#@#.ami-video-placeholder
+usmagazine.com#@#.storifyme-inline-widget
+usmagazine.com##.ad__slot
+usmagazine.com###taboola-right-rail-thumbnails
+
+ticketmaster.com##ul[data-testid="eventList"] > li:has(span[class*="Badge"]:contains("Promoted"))
+ticketmaster.com##ul[data-testid="eventList"] > li:has(> div:empty)
+ticketmaster.com#?#[id*=ad-slot] + div:contains(Advertisement)
+ticketmaster.com#?#[id*=ad-slot] + p:contains(Advertisement)
+
+google.com##c-wiz:not(:has(c-wiz)):has([aria-label^="Open My Ad Center"])
+
+! rokt ads updated
+##[id^=rokt-place]
+##[id^=rokt-controller]
+
+! rokt powered upsells
+##div[class^=Show-sc]:has([data-event-category=co2_upsells])
+
+yahoo.com##[class*=":invisible"]
+
+theonion.com##div[style*="#f3f3f3"]
+
+nfl.com##[class*="section-adv"]
+
+hianime.to##a:has([src*="imgclouding.com"])
+
+! forbes mse blank adspace
+forbes.com#!#fbs-ad
+forbes.com##[class*="stickyAd"]
+forbes.com##[class*="adContainer"]
+forbes.com##div[role="presentation"]:has(> fbs-ad)
+forbes.com##[data-testid="ad-container"]
+
+dailymail.co.uk##.iframe-creator[src*="magaland"]
+dailymail.co.uk#!#[class*="dmg-ads"]
+
+work.ink##.adsense-wrapper
+work.ink##.adsbygoogle
+work.ink#!#[id*='google_ads_']
+work.ink#!#div[class*="z-[998]"]
+
+einthusan.*##+js(set, pbjs, emptyObj)
+
+! tvtropes.org - anti-adblock wall bypass
+! Prevent wall function from removing real page content (stable strings, not randomized names)
+tvtropes.org##+js(trusted-rpnt, script, getElementById("main-entry"), getElementById("main-entry-x"), condition, adblock_notice)
+tvtropes.org##.adblock_notice
+tvtropes.org##+js(remove-cookie, ad_block_detected)
+
+! skmedix.pl - speed up detection + retry timers to bypass ad iframe check
+skmedix.pl##+js(nano-stb, Math.random(), *, 0.02)
+
+! coolmathgames.com - prevent game freeze when rewarded/interstitial ads are blocked
+! Force adblockDetected=true so cmgAdBreak and cmgRewardsAdBreak return early with adBreakComplete
+coolmathgames.com##+js(set, adblockDetected, true)
+
+@@||ladowntownnews.com^$generichide
+ladowntownnews.com#@#form#advertise
+ladowntownnews.com##div.label-ad
+
+! allrecipes top spacer
+allrecipes.com#$#.mm-ads-leaderboard-spacer { display: block !important; height: 64px !important; min-height: 0px !important; @media (width >= 1120px) { height: 148px !important; } }
+
+monetag.com#@#HTML
+
+! START HTML-LOAD.COM BLOCK
+! If you encounter the html-load.com popup, try adding the domain to each of the following...
+@@||raider.io,dictionary.cambridge.com,picrew.me,infinityfree.com,www.buzzfeed.com,huffpost.com,onlinegdb.com,wordhippo.com,minecraftskins.com,omnicalculator.com,scribd.com,namemc.com,geoguessr.com,rollingstone.com,billboard.com,deadline.com,hollywoodreporter.com,variety.com,calculatorsoup.com,chunkbase.com,draftsim.com,pickerwheel.com^$generichide
+raider.io,dictionary.cambridge.com,picrew.me,infinityfree.com,www.buzzfeed.com,huffpost.com,onlinegdb.com,tunebat.com,wordhippo.com,minecraftskins.com,omnicalculator.com,scribd.com,namemc.com,geoguessr.com,rollingstone.com,billboard.com,deadline.com,hollywoodreporter.com,variety.com,calculatorsoup.com,chunkbase.com,draftsim.com,pickerwheel.com##+js(set-local-storage-item, adshield-analytics-uuid, $remove$)
+raider.io,dictionary.cambridge.com,picrew.me,infinityfree.com,www.buzzfeed.com,huffpost.com,onlinegdb.com,tunebat.com,wordhippo.com,minecraftskins.com,omnicalculator.com,scribd.com,namemc.com,geoguessr.com,rollingstone.com,billboard.com,deadline.com,hollywoodreporter.com,variety.com,calculatorsoup.com,chunkbase.com,draftsim.com,pickerwheel.com##+js(set-local-storage-item, /_fa_bGFzdF9iZmFfYXQ=$/, $remove$)
+raider.io,dictionary.cambridge.com,picrew.me,infinityfree.com,www.buzzfeed.com,huffpost.com,onlinegdb.com,tunebat.com,wordhippo.com,minecraftskins.com,omnicalculator.com,scribd.com,namemc.com,geoguessr.com,rollingstone.com,billboard.com,deadline.com,hollywoodreporter.com,variety.com,calculatorsoup.com,chunkbase.com,draftsim.com,pickerwheel.com##+js(set-local-storage-item, /_fa_dXVpZA==$/, $remove$)
+raider.io,dictionary.cambridge.com,picrew.me,infinityfree.com,www.buzzfeed.com,huffpost.com,onlinegdb.com,tunebat.com,wordhippo.com,minecraftskins.com,omnicalculator.com,scribd.com,namemc.com,geoguessr.com,rollingstone.com,billboard.com,deadline.com,hollywoodreporter.com,variety.com,calculatorsoup.com,chunkbase.com,draftsim.com,pickerwheel.com##+js(set-local-storage-item, /_fa_Y2FjaGVfaXNfYmxvY2tpbmdfYWNjZXB0YWJsZV9hZHM=$/, $remove$)
+raider.io,dictionary.cambridge.com,picrew.me,infinityfree.com,www.buzzfeed.com,huffpost.com,onlinegdb.com,tunebat.com,wordhippo.com,minecraftskins.com,omnicalculator.com,scribd.com,namemc.com,geoguessr.com,rollingstone.com,billboard.com,deadline.com,hollywoodreporter.com,variety.com,calculatorsoup.com,chunkbase.com,draftsim.com,pickerwheel.com##+js(set-local-storage-item, /_fa_Y2FjaGVfaXNfYmxvY2tpbmdfYWRz$/, $remove$)
+raider.io,dictionary.cambridge.com,picrew.me,infinityfree.com,www.buzzfeed.com,huffpost.com,onlinegdb.com,tunebat.com,wordhippo.com,minecraftskins.com,omnicalculator.com,scribd.com,namemc.com,geoguessr.com,rollingstone.com,billboard.com,deadline.com,hollywoodreporter.com,variety.com,calculatorsoup.com,chunkbase.com,draftsim.com,pickerwheel.com##+js(set-local-storage-item, /_fa_Y2FjaGVfYWRibG9ja19jaXJjdW12ZW50X3Njb3Jl$/, $remove$)
+raider.io,dictionary.cambridge.com,picrew.me,infinityfree.com,www.buzzfeed.com,huffpost.com,onlinegdb.com,tunebat.com,wordhippo.com,minecraftskins.com,omnicalculator.com,scribd.com,namemc.com,geoguessr.com,rollingstone.com,billboard.com,deadline.com,hollywoodreporter.com,variety.com,calculatorsoup.com,chunkbase.com,draftsim.com,pickerwheel.com##+js(prevent-setTimeout, error-report.com)
+raider.io,dictionary.cambridge.com,picrew.me,infinityfree.com,www.buzzfeed.com,huffpost.com,onlinegdb.com,tunebat.com,wordhippo.com,minecraftskins.com,omnicalculator.com,scribd.com,namemc.com,geoguessr.com,rollingstone.com,billboard.com,deadline.com,hollywoodreporter.com,variety.com,calculatorsoup.com,chunkbase.com,draftsim.com,pickerwheel.com##+js(trusted-replace-argument, HTMLScriptElement.prototype.setAttribute, 1, noopFunc, condition, error-report.com)
+
+! END HTML-LOAD.COM BLOCK
+
+pickerwheel.com##+js(remove-node-text, script, html-load.com)
+pickerwheel.com##+js(remove-node-text, script, Failed to load 3rd-party image)
+draftsim.com##+js(remove-node-text, script, html-load.com)
+draftsim.com##+js(remove-node-text, script, Failed to load 3rd-party image)
+calculatorsoup.com##+js(remove-node-text, script, html-load.com)
+calculatorsoup.com##+js(remove-node-text, script, Failed to load 3rd-party image)
+calculatorsoup.com##+js(set, window.confirm, noopFunc)
+chunkbase.com##+js(remove-node-text, script, html-load.com)
+chunkbase.com##+js(remove-node-text, script, Failed to load 3rd-party image)
+chunkbase.com##+js(set, window.confirm, noopFunc)
+omnicalculator.com##+js(remove-node-text, script, html-load.com)
+scribd.com##+js(remove-node-text, script, html-load.com)
+tunebat.com##+js(remove-node-text, script, html-load.com)
+namemc.com##+js(remove-node-text, script, html-load.com)
+geoguessr.com##+js(remove-node-text, script, html-load.com)
+rollingstone.com##+js(remove-node-text, script, html-load.com)
+rollingstone.com##+js(remove-node-text, script, Failed to load 3rd-party image)
+billboard.com##+js(remove-node-text, script, html-load.com)
+billboard.com##+js(remove-node-text, script, Failed to load 3rd-party image)
+deadline.com##+js(remove-node-text, script, html-load.com)
+deadline.com##+js(remove-node-text, script, Failed to load 3rd-party image)
+hollywoodreporter.com##+js(remove-node-text, script, html-load.com)
+hollywoodreporter.com##+js(remove-node-text, script, Failed to load 3rd-party image)
+variety.com##+js(remove-node-text, script, html-load.com)
+cycletrader.com##+js(remove-node-text, script, content-loader.com)
+cycletrader.com##+js(remove-node-text, script, html-load.com)
+cycletrader.com##+js(remove-node-text, script, Failed to load 3rd-party image)
+cycletrader.com##+js(set-constant, ttd_dom_ready, noopFunc)
+
+@@||hurawatch.cc^$generichide
+hurawatch.cc##+js(addEventListener-defuser, '', break;case $.)
+hurawatch.cc##+js(remove-node-text, script, /;}}};break;case\s\$\./)
+hurawatch.cc##+js(set, window.open, noopFunc)
+
+! fair ads partner, ensure badge placements
+topsecretrecipes.com##.adthrive-ad
+topsecretrecipes.com###adthrive-auto-injected-container
+
+readcomiconline.li#!#iframe[style*="width: 100%"]
+readcomiconline.li##+js(set, window.open, noopFunc)
+
+@@||askvoid.com^$generichide
+askvoid.com#!#div.fc-consent-root
+askvoid.com#!#div.react-grid-item:has(#ad-banner)
+
+chaturflix.cam##+js(remove-node-text, script, /adblock|popunder|openedPop|WebAssembly/)
+chaturflix.cam##+js(prevent-window-open)
+chaturflix.cam##+js(abort-current-script, decodeURI, decodeURIComponent)
+chaturflix.cam##+js(abort-current-script, EventTarget.prototype.addEventListener, delete window)
+chaturflix.cam##+js(set, window.open, noopFunc)
+
+infinityscans.org##+js(trusted-replace-outbound-text, atob, window.matchMedia('(display-mode: standalone)').matches, true)
+infinityscans.org##+js(trusted-replace-node-text, script, /\}\)\;\s+\(function\(\)\{var .*?\)\]\(\)\;\}\}\(\)\)\)\;/s, });)
+infinityscans.org##+js(trusted-replace-outbound-text, atob, .length === 0, .length === 31)
+infinityscans.org##+js(prevent-setTimeout, .adv-)
+infinityscans.org##+js(trusted-replace-node-text, script, '/  function [a-zA-Z]{1,2}\([a-zA-Z]{1,2},[a-zA-Z]{1,2}\).*?\(\)\{return [a-zA-Z]{1,2}\;\}\;return [a-zA-Z]{1,2}\(\)\;\}/')
+infinityscans.org#!#div[id*="div_netpub"]
+infinityscans.org#!##imp-notice
+
+flixbaba.com##+js(prevent-fetch, doubleclick)
+ign.com##.adunit-wrapper
+
+photopea.com##div:has(> div.pgAdWrapper)
+today.com#!#.topbannerAd
+
+ww4.123moviesfree.net#%#//scriptlet('set-constant', 'window.open', 'noopFunc')
+
+amazon.com##+js(json-prune, cuepointPlaylist vodPlaybackUrls.result.playbackUrls.cuepoints)
+primevideo.com##+js(json-prune, cuepointPlaylist vodPlaybackUrls.result.playbackUrls.cuepoints)
+www.amazon.co.jp,www.amazon.co.uk,www.amazon.com,www.amazon.de,www.primevideo.com##+js(xml-prune, xpath(//*[name()="Period"][.//*[@value="Ad"]] | /*[name()="MPD"]/@mediaPresentationDuration | //*[name()="Period"]/@start), [value="Ad"], .mpd)
+www.amazon.co.jp,www.amazon.co.uk,www.amazon.com,www.amazon.de,www.primevideo.com##+js(xml-prune, xpath(//*[name()="Period"][.//*[@value="Draper"]] | /*[name()="MPD"]/@mediaPresentationDuration | //*[name()="Period"]/@start), [value="Draper"], .mpd)
+www.amazon.co.jp,www.amazon.co.uk,www.amazon.com,www.amazon.de,www.primevideo.com##+js(xml-prune, 'xpath(//*[name()="Period"][.//*[name()="BaseURL" and contains(text(),"/interstitial/")]] | /*[name()="MPD"][.//*[name()="BaseURL" and contains(text(),"/interstitial/")]]/@mediaPresentationDuration | /*[name()="MPD"][.//*[name()="BaseURL" and contains(text(),"/interstitial/")]]/*[name()="Period"]/@start)', , .mpd)
+
+fmovies.co#%#//scriptlet('set-constant', 'window.open', 'noopFunc')
+fmovies.co#%#//scriptlet('disable-newtab-links')
+pistona.xyz^$generichide
+pistona.xyz#%#//scriptlet('set-constant', 'window.open', 'noopFunc')
+pistona.xyz#%#//scriptlet('disable-newtab-links')
+
+9animetv.to#%#//scriptlet('set-constant', 'window.open', 'noopFunc')
+9animetv.to#%#//scriptlet('disable-newtab-links')
+9animetv.to##+js(set-cookie, __pf, 1)
+9animetv.to##+js(aopw, _pop)
+9animetv.to##+js(aopr, mm)
+s3embtaku.pro##+js(set-cookie, __pf, 1)
+s3embtaku.pro##+js(aopw, _pop)
+s3embtaku.pro##+js(aopr, mm)
+
+pch.com#%#//scriptlet('remove-attr', 'srcdoc')
+
+html-load.com##html:not(:has(> head > style:only-child:has-text(width:399px;height:411px))):style(filter: opacity(0) !important; pointer-events: none !important;)
+tunebat.com##div[id*="img_"]
+
+outlook.live.com##div:has(> div > div > span > a[href*="https://go.microsoft.com/fwlink/?linkid="])
+
+yelp.com#@#.ABP
+yelp.*#@#main[class^="searchResultsContainer"] li h2:-abp-contains(Sponsored)
+
+indeed.com#@##mosaic-provider-jobcards li:has(.sponsoredJob)
+
+stevenuniverse.com#!##adblock-popup
+
+! google sponsored product search. destroy container if on old verison, on new version let it stay
+!#if version>= 1.11.0
+google.com##.cu-container
+google.com#^#.cu-container
+!#else
+google.com##.cu-container
+google.com#!#.cu-container
+!#endif
+
+! for adblock test sites
+d3ward.github.io#!#.adbox.banner_ads.adsbox
+d3ward.github.io#!#.textads
+###ADSLOT_1
+
+pinterest.com#!#div[aria-label="Ad blocker modal"]
+pinterest.com#$#body { overflow: visible!important; touch-action: auto!important;}
+
+flixbaba.*#%#//scriptlet('set-constant', 'window.open', 'noopFunc')
+flixbaba.*#%#//scriptlet('disable-newtab-links')
+vidjoy.pro#%#//scriptlet('set-constant', 'window.open', 'noopFunc')
+vidjoy.pro#%#//scriptlet('disable-newtab-links')
+mangafire.to#%#//scriptlet('set-constant', 'window.open', 'noopFunc')
+mangafire.to#%#//scriptlet('disable-newtab-links')
+mangabuddy.com#%#//scriptlet('set-constant', 'window.open', 'noopFunc')
+mangabuddy.com#%#//scriptlet('disable-newtab-links')
+
+traderie.com###ad-rails
+traderie.com##.cool-slot
+
+duolingo.com##div[class*=" "] > div[class^="_"]:not([class*=" "]) > div[class*=" "]:has(> div[class^="_"]:only-child > div[class^="_"]:first-child > ins.adsbygoogle)
+lookmovie2.*##+js(trusted-replace-xhr-response, /Timeout":\d+/, Timeout":0, /api/v)
+lookmovie2.to##+js(set-constant, Yii2App.playbackTimeout, 0)
+houstonchronicle.com#%#//scriptlet('prevent-element-src-loading', 'script', '/\/(hearst|script)\.js/')
+hianimez.to#%#//scriptlet('prevent-window-open', '')
+now.gg###div-ad-app-page-skyscraper-container
+client.falixnodes.net##+js(set, amzn_aps_csm, emptyObj)
+
+abcya.com#!#[data-testid="leader-ad"]
+abcya.com#!#.billboard-ad
+abcya.com#!#.modal-overlay:has(.modal-content-header:has-text("Adblocker"))
+abcya.com#!#.modal-overlay>#adrender
+
+temu.com##[class*='goodsItem']:has(span:contains(AD))
+temu.com##[class*='goodsWrapper']:has(div:contains(AD))
+temu.com##[class*='goodContainer']:has(div:contains(AD))
+temu.com##[class*='cardWrap']:has(div:contains(AD))
+temu.com#?#[data-tooltip*='goodContainer']:has(div:contains(AD)):upward(2)
+temu.com#?#.goods-container:contains(AD)
+
+eater.com##.adblock-allowlist-messaging__wrapper
+
+! streamed.su
+embedstreams.top##+js(abort-on-property-write, Adcash)
+
+! Sites where visual mode looks terrible generally
+amazon.com##$skipVisualMode
+mozilla.org##$skipVisualMode
+youtube.com##$skipVisualMode
+pornhub.com##$skipVisualMode
+xhamster.com##$skipVisualMode
+chess.com##$skipVisualMode
+facebook.com##$skipVisualMode
+vidbox.dev##$skipVisualMode
+
+! This ad gets resurrected and forces itself not to be destroyed
+smagazine.com#^#.ad-slot.first
+
+! Too visually noisy as top bar animates up and black background gets removed
+cnn.com#^#.ad-slot-header__wrapper
+
+myflixerz.to##.alert.mb-3
+myflixerz.to##+js(set-cookie, __pf, 1)
+sflix.ps##+js(set-cookie, __pf, 1)
+
+crunchyroll.com#?#div:has(> div > img[alt="Warning icon"])
+seelen.io#?#div:has( > .ant-modal-root)
+
+walmart.*#?#div > div:has( > div[io-id]:-abp-contains(Sponsored))
+
+	
+dictionary.cambridge.org##+js(remove-node-text, script, html-load.com)
+dictionary.cambridge.org##+js(set-local-storage-item, adshield-analytics-uuid, $remove$)
+dictionary.cambridge.org##+js(set-local-storage-item, /_fa_bGFzdF9iZmFfYXQ=$/, $remove$)
+dictionary.cambridge.org##+js(set-local-storage-item, /_fa_dXVpZA==$/, $remove$)
+dictionary.cambridge.org##+js(set-local-storage-item, /_fa_Y2FjaGVfaXNfYmxvY2tpbmdfYWNjZXB0YWJsZV9hZHM=$/, $remove$)
+dictionary.cambridge.org##+js(set-local-storage-item, /_fa_Y2FjaGVfaXNfYmxvY2tpbmdfYWRz$/, $remove$)
+dictionary.cambridge.org##+js(set-local-storage-item, /_fa_Y2FjaGVfYWRibG9ja19jaXJjdW12ZW50X3Njb3Jl$/, $remove$)
+
+raider.io##+js(remove-node-text, script, html-load.com)
+raider.io##+js(set-local-storage-item, adshield-analytics-uuid, $remove$)
+raider.io##+js(set-local-storage-item, /_fa_bGFzdF9iZmFfYXQ=$/, $remove$)
+raider.io##+js(set-local-storage-item, /_fa_dXVpZA==$/, $remove$)
+raider.io##+js(set-local-storage-item, /_fa_Y2FjaGVfaXNfYmxvY2tpbmdfYWNjZXB0YWJsZV9hZHM=$/, $remove$)
+raider.io##+js(set-local-storage-item, /_fa_Y2FjaGVfaXNfYmxvY2tpbmdfYWRz$/, $remove$)
+raider.io##+js(set-local-storage-item, /_fa_Y2FjaGVfYWRibG9ja19jaXJjdW12ZW50X3Njb3Jl$/, $remove$)
+
+wordhippo.com##+js(remove-node-text, script, html-load.com)
+wordhippo.com##+js(set-local-storage-item, adshield-analytics-uuid, $remove$)
+wordhippo.com##+js(set-local-storage-item, /_fa_bGFzdF9iZmFfYXQ=$/, $remove$)
+wordhippo.com##+js(set-local-storage-item, /_fa_dXVpZA==$/, $remove$)
+wordhippo.com##+js(set-local-storage-item, /_fa_Y2FjaGVfaXNfYmxvY2tpbmdfYWNjZXB0YWJsZV9hZHM=$/, $remove$)
+wordhippo.com##+js(set-local-storage-item, /_fa_Y2FjaGVfaXNfYmxvY2tpbmdfYWRz$/, $remove$)
+wordhippo.com##+js(set-local-storage-item, /_fa_Y2FjaGVfYWRibG9ja19jaXJjdW12ZW50X3Njb3Jl$/, $remove$)
+
+@@||bonappetit.com^$generichide
+@@||pearson.com^$generichide
+cnbc.com#^#div:has( > div > div > div > div > div > h3:contains("allowing ads"))
+
+coolmathgames.com#%#//scriptlet('set-constant', 'google', 'emptyObj')
+coolmathgames.com#%#//scriptlet('set-constant', 'cmgpbjs', 'emptyObj')
+coolmathgames.com#%#//scriptlet('set-constant', 'displayAdblockOverlay', 'false')
+coolmathgames.com#%#//scriptlet('set-constant', 'start_full_screen_without_ad', 'false')
+coolmathgames.com#%#//scriptlet('set-constant', 'validSubscriber', 'true')
+
+flixhq.to##+js(disable-newtab-links)
+flixhq.to##+js(set, window.open, noopFunc)
+flixhq.to##.notranslate:has(> iframe[srcdoc])
+flixhq.to##div[style*="position: fixed"][style*="z-index"]:has(> iframe[srcdoc])
+
+thewoksoflife.com##$skipVisualMode
+
+xhamster.com##+js(remove-attr, style, .thumb-list__item, asap stay)
+xhamster.com##+js(remove-attr, style, .thumb-image-container, asap stay)
+xhamster.com##+js(remove-attr, style, .video-thumb-info, asap stay)
+xhamster.com##+js(remove-attr, style, [data-role="promo-messages-wrapper"] > div, asap stay)
+xhamster.com##+js(remove-attr, style, .item-container, asap stay)
+xhamster.com##+js(remove-attr, style, .width-wrap, asap stay)
+xhamster.com##.thumb-list__item > div[style*="inset"]
+
+mediafire.com##.DlBtnUltraUpsell
+mediafire.com#@#.ad_unit:not(.text-ad)
+mediafire.com#@#.ads
+wcostream.*##+js(nofab)
+wcostream.*##+js(noeval)
+wcostream.*##+js(abort-current-script, document.createElement, jsc.mgid.com)
+wcostream.*##+js(prevent-window-open)
+embed.wcostream.com##+js(remove-node-text, script, /google_jobrunner|AdBlock|pubadx|embed\.html/i)
+
+@@||wcoanimedub.tv/inc/embed/ads.js
+wcoanimedub.tv##+js(no-setTimeout-if, AdBlock)
+wcoanimedub.tv##+js(set-constant, isAdBlockActive, false)
+wcoanimedub.tv,wco.tv##div[style^="float:right; width:300px; height:"]
+
+wco.tv##+js(prevent-xhr, api)
+wco.tv,wcostream.tv,wcoflix.tv,wcoanimesub.tv###top-alert:has-text(/adblock/i)
+
+ajc.com#%#//scriptlet('remove-class', 'blur-story')
+
+@@||tiermaker.com^$generichide
+southpark.cc.com##+js(json-prune-fetch-response, imasdk, , propsToMatch, topaz.)
+adultswim.com##+js(m3u-prune, /vod-media-aka.warnermediacdn.com\/mtg\d+\/.*\d{3\,4}x\d{3\,4}-.*\.ts/, .m3u8)
+ncaa.com##+js(m3u-prune, /vod-media-aka\.warnermediacdn\.com\/prod/, .m3u8)
+
+bloomberg.com###adBlockerContainer
+@@||roku.com^$generichide
+readallcomics.com##div[style*="position: fixed; z-index: 9999999999"]
+readallcomics.com##+js(noeval-if, /chp_?ad/)
+movies7.us##+js(nowoif)
+movies7.us#%#//scriptlet('abort-current-inline-script', 'document.createElement', 'break;case')
+movies7.us#%#//scriptlet('prevent-window-open')
+
+magma.com#!#partnership-content
+seelen.io##div[style*="rgba(0, 0, 0, 0.5)"][style*="z-index: 9999999"]
+foxnews.com##+js(set-constant, Taplytics.runningExperiments, noopFunc)
+foxnews.com##+js(set-constant, Taplytics.featureFlagEnabled, noopFunc)
+foxnews.com##+js(set-constant, Taplytics, {})
+
+channel4.com##div:has( > div > div[id*="adBlock-notification"])
+
+! Pluto TV streaming ad blocking
+! xml-prune removes ad periods from manifest, creating gaps
+pluto.tv##+js(xml-prune, 'xpath(//*[name()="Period"][.//*[name()="BaseURL" and contains(text(),"_ad")]])', , .mpd)
+! Scriptlet detects and auto-skips gaps (where ads were removed from manifest using a pruning scriptlet)
+pluto.tv#%#//scriptlet('stream-auto-skip', '', '', '750')
+pluto.tv##.pauseAdContainer
+
+! chess.com anti-adblock fix
+chess.com#@#body.board-layout.with-und:style(margin-right:0px!important)
+
+! Peacock live - remove ad Periods (no ContentProtection) from live DAI manifests
+! Unlike VOD xml-prune, do NOT remove @start or mediaPresentationDuration (needed for live timeline)
+peacocktv.com##+js(xml-prune, xpath(//*[name()="Period"][not(.//*[name()="ContentProtection"])]), , /-sle-.+\.mpd/)
+
+3dtuning.com###detected
+
+! Poki rewarded ads - override currentTime for noop videos so SDK's >=2s check passes
+poki.com##+js(video-currenttime-multiplier)
+
+! streamex.sh / vsembed.ru / cinemaos.tech popup and redirect ad blocking
+streamex.sh##+js(nowoif)
+streamex.sh##+js(aopr, exoJsPop101)
+cinemaos.tech##+js(nowoif)
+cinemaos.tech##+js(aopr, exoJsPop101)
+vsembed.ru##+js(nowoif)
+vsembed.ru##+js(aopr, exoJsPop101)
+vsembed.ru##+js(acs, decodeURI, decodeURIComponent)
+
+! vidbox.dev anti-adblock - hide modal, sponsored content, and stop reload loop
+vidbox.dev##div[role="dialog"][aria-labelledby="adblock-title"]
+vidbox.dev##section[aria-label="Sponsored content"]
+vidbox.dev##.native-ads-slot
+vidbox.dev###ad-container
+vidbox.dev##html:style(overflow: auto !important)
+vidbox.dev##body:style(overflow: auto !important)
+vidbox.dev##+js(nostif, getComputedStyle)
+vidbox.dev##+js(no-fetch-if, method:HEAD)
+vidbox.dev##.dark\:bg-black.pt-20.bg-white.w-full.z-10.relative > .lg\:px-8.md\:px-6.px-4.max-w-\[1440px\].mx-auto:has(#ad-container)
+
+nexusmods.com##body > div:has(h3:has-text(Support us and double your speed))
+nexusmods.com##html:style(overflow: auto !important)
+nexusmods.com##body:style(overflow: auto !important)
+
+lootlabs.gg##body > div:has(span:has-text(Please disable your Adblocker))
+lootlabs.gg##html:style(overflow: auto !important)
+lootlabs.gg##body:style(overflow: auto !important)
+
+animekai.*,anikai.to##+js(nowoif, _blank)
+animekai.*,anikai.to,flixtor.mov,myflixer.bz,sflix.fi,yflix.to##+js(nosiif, /;if\(!\(|=null/)
