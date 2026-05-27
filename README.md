@@ -30,6 +30,21 @@ https://cdn.jsdelivr.net/gh/piedotorg/pie-adblock-rules@<ref>/adb-filters/<file>
 
 A GitHub Actions workflow (`.github/workflows/release.yml`) automatically tags `main` as `v<pieFilterVersion>` whenever `adb-filters/` is updated, so each `pieFilterVersion` bump produces a stable, immutable jsDelivr URL.
 
+### Releasing a rule update
+
+To publish a change so installed extensions pick it up:
+
+1. Edit the relevant file(s) under `adb-filters/` (`pie_custom.txt`, `external-fixes.txt`, or `default-pie-custom.json`).
+2. **Bump `pieFilterVersion` in `adb-filters/filter-versions.json`** — even if the substantive change is only to `external-fixes.txt` or the DNR ruleset. `pieFilterVersion` is the single canonical version that drives:
+   - the `v<N>` tag created by `release.yml` (the tagger ignores other version fields),
+   - the immutable jsDelivr URL the extension fetches each filter body and the DNR ruleset from, and
+   - the extension's force-refresh signal, which polls `filter-versions.json` and compares `pieFilterVersion` against the last-seen value.
+
+   If you change a filter file without bumping `pieFilterVersion`, no new tag is created and clients keep fetching the old pinned content.
+
+   `ublockVersion` and `declarativeVersion` are retained as informational metadata and are no longer required to bump.
+3. Commit and push to `main`. The tag is created automatically; jsDelivr typically purges its edge cache for `@main` within a few minutes; the extension's 10-minute poll picks up the bump on its next tick.
+
 ## Scriptlets
 In `scriptlets/`, you will find our scriptlet reader source code and scriptlet source functions. Pie believes this scriptlet reader to be more plug-and-play ready than the other AST-based rule readers available online. Our scriptlet reader works on both UBO and ADG style scriptlet rules.
 
