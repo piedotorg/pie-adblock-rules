@@ -82,10 +82,11 @@ www.youtube.com##+js(set, ytcfg.data_.EXPERIMENT_FLAGS.all_web_network_machine_r
 
 ! experimental
 www.youtube.com##+js(trusted-json-edit-xhr-request, [?..userAgent*="adunit"]..client[?.clientName=="WEB"]+={"clientScreen":"ADUNIT"}, propsToMatch, /player?)
-www.youtube.com##+js(trusted-json-edit-xhr-request, [?..userAgent*="lactmilli"]+={"params":"8AUB"}, propsToMatch, /player?)
-www.youtube.com##+js(trusted-json-edit-xhr-request, [?..userAgent*="lactmilli"]..playbackContext.contentPlaybackContext.lactMilliseconds="${now}", propsToMatch, /player?)
+! NOTE: the two lactmilli rules below use a =/regex/ filter instead of uBO's *="lactmilli" on purpose: extension builds <= 1.33.8 ship an old JSONPath that throws on a root-level += (blocking the /player request) and cannot expand ${now}; the regex form is rejected by that engine (clean no-op) and applied by newer builds. See docs/youtube-adblock/README.md.
+www.youtube.com##+js(trusted-json-edit-xhr-request, [?..userAgent=/lactmilli/]+={"params":"8AUB"}, propsToMatch, /player?)
+www.youtube.com##+js(trusted-json-edit-xhr-request, [?..userAgent=/lactmilli/]..playbackContext.contentPlaybackContext.lactMilliseconds="${now}", propsToMatch, /player?)
 www.youtube.com##+js(trusted-json-edit-xhr-request, [?..userAgent*="instream"]..playbackContext[?.contentPlaybackContext]+={"adPlaybackContext":{"adType":"AD_TYPE_INSTREAM"}}, propsToMatch, /player?)
-www.youtube.com##+js(trusted-json-edit-xhr-request, [?..userAgent*="eafg"]+={"params":"eAFgAQ"}, propsToMatch, /player?)
+www.youtube.com##+js(trusted-json-edit-xhr-request, [?..userAgent=/eafg/]+={"params":"eAFgAQ"}, propsToMatch, /player?)
 
 
 ! pie yt shorts scriptlet
