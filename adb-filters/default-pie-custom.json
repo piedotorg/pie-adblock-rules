@@ -4889,5 +4889,17 @@
       "resourceTypes": ["image"]
     },
     "priority": 1
+  },
+  {
+    "id": 1790616799,
+    "action": {
+      "type": "allow"
+    },
+    "condition": {
+      "initiatorDomains": ["intuitina.com"],
+      "urlFilter": "||googletagmanager.com/gtm.js",
+      "resourceTypes": ["script"]
+    },
+    "priority": 100
   }
 ]
