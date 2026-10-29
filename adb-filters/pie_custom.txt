@@ -906,3 +906,11 @@ lootlabs.gg##body:style(overflow: auto !important)
 
 animekai.*,anikai.to##+js(nowoif, _blank)
 animekai.*,anikai.to,flixtor.mov,myflixer.bz,sflix.fi,yflix.to##+js(nosiif, /;if\(!\(|=null/)
+
+! character.ai (2026-10-29, v340): the site's own "ad shelf" (home / discover / search / chat) swaps in a first-party c.ai+ or c.ai lite
+! creative whenever the Google slot does not fill, i.e. whenever ads are blocked, so users see a large upsell bar at the top of the page.
+! The shelf wrapper is an inline-styled div whose first child is the "Advertisement" label plus the "Hide ads" upsell button; hide the
+! whole wrapper so no empty box is left behind. Second rule is a text-based fallback in case the button classes change.
+! Not covered on purpose: the chat page's 104px top ad band (hiding it leaves the chat header hidden, the layout keys off its height).
+character.ai##div[style="width: 100%;"]:has(> div > p + button.underline.bg-transparent)
+character.ai#?#div[style="width: 100%;"]:has(> div > p:has-text(/^Advertisement$/) + button)
