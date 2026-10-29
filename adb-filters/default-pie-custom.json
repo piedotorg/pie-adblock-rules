@@ -4901,5 +4901,29 @@
       "resourceTypes": ["script"]
     },
     "priority": 100
+  },
+  {
+    "id": 1793304172,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "initiatorDomains": ["game8.co"],
+      "urlFilter": "||html-load.cc^",
+      "isUrlFilterCaseSensitive": false
+    },
+    "priority": 100
+  },
+  {
+    "id": 1793304173,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "initiatorDomains": ["game8.co"],
+      "urlFilter": "||html-load.com^",
+      "isUrlFilterCaseSensitive": false
+    },
+    "priority": 100
   }
 ]
